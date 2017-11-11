@@ -14,4 +14,32 @@
         <item>Villa Gordiani</item>
         <item>Virtus Ri.Va.</item>
     </string-array>
+    <string-array name="players">
+        <item>Alivernini Marco</item>
+        <item>Artibani Francesco</item>
+        <item>Artibani Giuseppe</item>
+        <item>Basile Gianluca</item>
+        <item>Cicchetti Simone</item>
+        <item>Cococcia Angelo</item>
+        <item>Colombi Alfredo</item>
+        <item>Conti Stefano</item>
+        <item>Costanzo Salvatore</item>
+        <item>D\'Antimi Alessio</item>
+        <item>D\'Antimi Matteo</item>
+        <item>D\'Antimi Stefano</item>
+        <item>D\'Auria Andrea</item>
+        <item>De Santis Filippo</item>
+        <item>De Santis Mattia</item>
+        <item>Dessì Flavio</item>
+        <item>Giustini Daniele</item>
+        <item>Giustini Patrizio</item>
+        <item>Masci Antonio</item>
+        <item>Palma Mario</item>
+        <item>Portieri Emanuele</item>
+        <item>Rainaldi Daniele (78)</item>
+        <item>Rainaldi Daniele (97)</item>
+        <item>Saccucci Valerio</item>
+        <item>Sebastiani Alessandro</item>
+        <item>Sebastiani Francesco</item>
+    </string-array>
 </resources>

@@ -3,24 +3,32 @@ package com.bernardini.danilo.convocazioniriofreddo;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
+import android.graphics.Color;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.TimePicker;
 
 import java.util.Calendar;
 
+import static android.R.id.list;
+
 public class AddCallActivity extends AppCompatActivity {
 
-    private static EditText mDate;
-    private static EditText mMatchTime;
+    private static final int SELECT_CONVOCATES = 1;
+    private static final String CONVOCATES = "convocates";
     private static EditText mCallTime;
+    private static TextView mConvocatesNumber;
 
     private int mYear;
     private int mMonth;
@@ -37,6 +45,7 @@ public class AddCallActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Crea convocazione");
         mDateTime = (EditText) findViewById(R.id.date_time);
         mCallTime = (EditText) findViewById(R.id.call_time);
+        mConvocatesNumber = (TextView) findViewById(R.id.convocates_number);
 
         Spinner homeSpinner = (Spinner) findViewById(R.id.home_spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -56,6 +65,31 @@ public class AddCallActivity extends AppCompatActivity {
                         adapter,
                         R.layout.away_spinner_row_nothing_selected,
                         this));
+
+        Button convocatesButton = (Button) findViewById(R.id.convocates_button);
+        convocatesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(), SelectConvocatesActivity.class);
+                startActivityForResult(i, SELECT_CONVOCATES);
+            }
+        });
+//        String[] convocatesList = getResources().getStringArray(R.array.players);
+//        ListView convocates = (ListView) findViewById(R.id.convocates_listview);
+//        final ArrayAdapter arrayAdapter = new ArrayAdapter(this,
+//                android.R.layout.simple_list_item_1, convocatesList);
+//        convocates.setAdapter(arrayAdapter);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == SELECT_CONVOCATES) {
+            if (resultCode == RESULT_OK) {
+                String[] convocates = data.getStringArrayExtra(CONVOCATES);
+                mConvocatesNumber.setText("Convocati: " + convocates.length);
+                mConvocatesNumber.setTextColor(Color.parseColor("#212121"));
+            }
+        }
     }
 
     public void datePicker(View v){
