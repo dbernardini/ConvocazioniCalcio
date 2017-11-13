@@ -9,6 +9,9 @@ import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.format.DateFormat;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -18,6 +21,7 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import java.util.Calendar;
 
@@ -25,10 +29,18 @@ import static android.R.id.list;
 
 public class AddCallActivity extends AppCompatActivity {
 
+    private static final String TAG = "AddCallActivity";
     private static final int SELECT_CONVOCATES = 1;
     private static final String CONVOCATES = "convocates";
-    private static EditText mCallTime;
     private static TextView mConvocatesNumber;
+    private String[] mConvocates;
+    private Spinner mHome;
+    private Spinner mAway;
+    private EditText mMatchPlace;
+    private EditText mDateTime;
+    private EditText mCallPlace;
+    private static EditText mCallTime;
+    private EditText mNotes;
 
     private int mYear;
     private int mMonth;
@@ -36,15 +48,20 @@ public class AddCallActivity extends AppCompatActivity {
     private int mHour;
     private int mMinute;
     private String date_time;
-    private EditText mDateTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_call);
         getSupportActionBar().setTitle("Crea convocazione");
+
+        mHome = (Spinner) findViewById(R.id.home_spinner);
+        mAway = (Spinner) findViewById(R.id.away_spinner);
         mDateTime = (EditText) findViewById(R.id.date_time);
+        mMatchPlace = (EditText) findViewById(R.id.match_place);
+        mCallPlace = (EditText) findViewById(R.id.call_place);
         mCallTime = (EditText) findViewById(R.id.call_time);
+        mNotes = (EditText) findViewById(R.id.notes);
         mConvocatesNumber = (TextView) findViewById(R.id.convocates_number);
 
         Spinner homeSpinner = (Spinner) findViewById(R.id.home_spinner);
@@ -71,24 +88,50 @@ public class AddCallActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(getApplicationContext(), SelectConvocatesActivity.class);
+                i.putExtra(CONVOCATES, mConvocates);
                 startActivityForResult(i, SELECT_CONVOCATES);
             }
         });
-//        String[] convocatesList = getResources().getStringArray(R.array.players);
-//        ListView convocates = (ListView) findViewById(R.id.convocates_listview);
-//        final ArrayAdapter arrayAdapter = new ArrayAdapter(this,
-//                android.R.layout.simple_list_item_1, convocatesList);
-//        convocates.setAdapter(arrayAdapter);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == SELECT_CONVOCATES) {
             if (resultCode == RESULT_OK) {
-                String[] convocates = data.getStringArrayExtra(CONVOCATES);
-                mConvocatesNumber.setText("Convocati: " + convocates.length);
+                mConvocates = data.getStringArrayExtra(CONVOCATES);
+                mConvocatesNumber.setText("Convocati: " + mConvocates.length);
                 mConvocatesNumber.setTextColor(Color.parseColor("#212121"));
             }
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_call, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.action_save:
+                Toast.makeText(this, "Convocazione salvata", Toast.LENGTH_SHORT).show();
+
+                DBManager dbManager = new DBManager(this);
+                dbManager.insertCall(mHome.getSelectedItem().toString(),
+                        mAway.getSelectedItem().toString(), mDateTime.getText().toString(),
+                        mMatchPlace.getText().toString(), mCallPlace.getText().toString(),
+                        mCallTime.getText().toString(), mNotes.getText().toString());
+
+                for (String convocate : mConvocates){
+                    dbManager.insertPlayersCalled(convocate, mDateTime.getText().toString());
+                }
+
+
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 
@@ -104,9 +147,15 @@ public class AddCallActivity extends AppCompatActivity {
 
                     @Override
                     public void onDateSet(DatePicker view, int year,int monthOfYear, int dayOfMonth) {
+                        String day = Integer.toString(dayOfMonth);
+                        if (day.length() == 1)
+                            day = "0" + day;
+                        monthOfYear += 1;
+                        String month = Integer.toString(monthOfYear);
+                        if (month.length() == 1)
+                            month = "0" + month;
+                        date_time = day + "/" + month + "/" + year;
 
-                        date_time = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
-                        //*************Call Time Picker Here ********************
                         timePicker();
                     }
                 }, mYear, mMonth, mDay);
@@ -158,11 +207,13 @@ public class AddCallActivity extends AppCompatActivity {
         }
 
         public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-            // Do something with the time chosen by the user
+            String hour = Integer.toString(hourOfDay);
+            if (hour.length() == 1)
+                hour = "0" + hour;
             String min = Integer.toString(minute);
-            if (min.equals("0"))
-                min = "00";
-            mCallTime.setText(hourOfDay + ":" + min);
+            if (min.length() == 1)
+                min = "0" + min;
+            mCallTime.setText(hour + ":" + min);
         }
     }
 

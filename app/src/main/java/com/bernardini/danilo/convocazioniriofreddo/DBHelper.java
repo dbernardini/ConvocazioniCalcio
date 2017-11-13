@@ -41,10 +41,10 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public static final String CREATE_TABLE_PLAYERS_CALLED =
             "CREATE TABLE IF NOT EXISTS " + PLAYERS_CALLED + " (" +
-                    PLAYER_ID + " INT," +
+                    NAME + " TEXT," +
                     DATE + " DATETIME," +
-                    "PRIMARY KEY (" + PLAYER_ID + "," + DATE + "), " +
-                    "FOREIGN KEY (" + PLAYER_ID + ") REFERENCES " + PLAYERS + "(" + PLAYER_ID + ")," +
+                    "PRIMARY KEY (" + NAME + "," + DATE + "), " +
+                    "FOREIGN KEY (" + NAME + ") REFERENCES " + PLAYERS + "(" + NAME + ")," +
                     "FOREIGN KEY (" + DATE + ") REFERENCES " + CALLS + "(" + DATE + ")" +
                     ")";
 

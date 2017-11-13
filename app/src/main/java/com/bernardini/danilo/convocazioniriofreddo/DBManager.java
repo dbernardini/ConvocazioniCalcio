@@ -4,12 +4,24 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
+
+import java.util.Date;
 
 public class DBManager {
 
     private static final String TAG = "DBManager";
-    private static final String NAME = "name";
     private static final String PLAYERS = "players";
+    private static final String CALLS = "calls";
+    private static final String NAME = "name";
+    private static final String HOME = "home";
+    private static final String AWAY = "away";
+    private static final String DATE = "date";
+    private static final String PLACE = "place";
+    private static final String CALL_PLACE = "call_place";
+    private static final String CALL_TIME = "call_time";
+    private static final String NOTES = "notes";
+    private static final String PLAYERS_CALLED = "players_called";
     private DBHelper mDbHelper;
 
     public DBManager(Context context) {
@@ -38,6 +50,99 @@ public class DBManager {
                 PLAYERS,
                 new String[] { NAME },
                 null, null, null, null, null, null);
+
+        return cursor;
+    }
+
+    public void insertCall(String home, String away, String dateTime, String place, String callPlace,
+                           String callTime, String notes){
+        SQLiteDatabase db = mDbHelper.getWritableDatabase();
+
+        String year = dateTime.substring(6,10);
+        String month = dateTime.substring(3,5);
+        String day = dateTime.substring(0,2);
+        String time = dateTime.substring(12) + ":00";
+        String date = year + "-" + month + "-" + day + " " + time;
+
+        ContentValues cv = new ContentValues();
+        cv.put(HOME, home);
+        cv.put(AWAY, away);
+        cv.put(DATE, date);
+        cv.put(PLACE, place);
+        cv.put(CALL_PLACE, callPlace);
+        cv.put(CALL_TIME, callTime);
+        cv.put(NOTES, notes);
+
+        db.insert(CALLS, null, cv);
+    }
+
+    public boolean deleteCall(String dateTime) {
+        String year = dateTime.substring(6,10);
+        String month = dateTime.substring(3,5);
+        String day = dateTime.substring(0,2);
+        String time = dateTime.substring(12) + ":00";
+        String date = year + "-" + month + "-" + day + " " + time;
+
+        SQLiteDatabase db = mDbHelper.getWritableDatabase();
+        if (db.delete(CALLS, DATE + "=?", new String[]{date}) > 0)
+            return true;
+        else return false;
+    }
+
+    public Cursor queryCalls() {
+        SQLiteDatabase db = mDbHelper.getReadableDatabase();
+        Cursor cursor = db.query(
+                CALLS,
+                new String[] { HOME,AWAY,DATE,PLACE,CALL_PLACE,CALL_TIME,NOTES },
+                null, null, null, null, null, null);
+
+        return cursor;
+    }
+
+    public Cursor queryCall(String date) {
+        SQLiteDatabase db = mDbHelper.getReadableDatabase();
+        Cursor cursor = db.query(
+                CALLS,
+                new String[] { HOME,AWAY,DATE,PLACE,CALL_PLACE,CALL_TIME,NOTES },
+                DATE + " = '" + date + "'",
+                null, null, null, null, null);
+
+        return cursor;
+    }
+
+    public void insertPlayersCalled(String player, String dateTime){
+        SQLiteDatabase db = mDbHelper.getWritableDatabase();
+
+        String year = dateTime.substring(6,10);
+        String month = dateTime.substring(3,5);
+        String day = dateTime.substring(0,2);
+        String time = dateTime.substring(12) + ":00";
+        String date = year + "-" + month + "-" + day + " " + time;
+
+        ContentValues cv = new ContentValues();
+        cv.put(NAME, player);
+        cv.put(DATE, date);
+
+        db.insert(PLAYERS_CALLED, null, cv);
+    }
+
+    public Cursor queryPlayersCalled() {
+        SQLiteDatabase db = mDbHelper.getReadableDatabase();
+        Cursor cursor = db.query(
+                PLAYERS_CALLED,
+                new String[] { NAME, DATE },
+                null, null, null, null, null, null);
+
+        return cursor;
+    }
+
+    public Cursor queryPlayersCalled(String date) {
+        SQLiteDatabase db = mDbHelper.getReadableDatabase();
+        Cursor cursor = db.query(
+                PLAYERS_CALLED,
+                new String[] { NAME },
+                DATE + " = '" + date + "'",
+                null, null, null, null, null);
 
         return cursor;
     }

@@ -52,18 +52,7 @@
                     <Spinner
                         android:id="@+id/home_spinner"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        />
-
-                    <!--<EditText-->
-                        <!--android:id="@+id/home"-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_centerHorizontal="true"-->
-                        <!--android:ems="15"-->
-                        <!--android:hint="Squadra di casa"-->
-                        <!--android:inputType="textCapSentences"-->
-                        <!--android:maxLines="1" />-->
+                        android:layout_height="wrap_content" />
 
                 </android.support.design.widget.TextInputLayout>
 
@@ -76,18 +65,7 @@
                     <Spinner
                         android:id="@+id/away_spinner"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        />
-
-                    <!--<EditText-->
-                        <!--android:id="@+id/away"-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_centerHorizontal="true"-->
-                        <!--android:ems="15"-->
-                        <!--android:hint="Squadra ospite"-->
-                        <!--android:inputType="textCapSentences"-->
-                        <!--android:maxLines="1" />-->
+                        android:layout_height="wrap_content" />
 
                 </android.support.design.widget.TextInputLayout>
 
@@ -190,7 +168,7 @@
                     android:layout_weight="1">
 
                     <EditText
-                        android:id="@+id/match_time"
+                        android:id="@+id/call_place"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"

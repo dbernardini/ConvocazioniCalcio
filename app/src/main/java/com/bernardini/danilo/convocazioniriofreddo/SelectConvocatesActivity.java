@@ -18,9 +18,11 @@ public class SelectConvocatesActivity extends AppCompatActivity {
 
     private static final String TAG = "SelectConvocateActivity";
     private static final String CONVOCATES = "convocates";
+    private static final String NAME = "name";
     private ArrayList<String> mPlayersList = new ArrayList<>();
     ArrayList<String> selectedItems = new ArrayList<>();
     private DBManager dbManager;
+    private String[] mConvocates;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,16 +36,15 @@ public class SelectConvocatesActivity extends AppCompatActivity {
         Cursor result = dbManager.queryPlayers();
         result.moveToFirst();
         for (int i = 0; i < result.getCount(); i++){
-            String player = result.getString(result.getColumnIndex("name"));
+            String player = result.getString(result.getColumnIndex(NAME));
             mPlayersList.add(player);
-            Log.i("Players", "Gocatore: "+player);
             result.moveToNext();
         }
         if (!mPlayersList.isEmpty())
             Collections.sort(mPlayersList.subList(0, mPlayersList.size()));
 
-//        String[] players = getResources().getStringArray(R.array.players);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.call_list_item, R.id.checkedTextView, mPlayersList);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.call_list_item,
+                R.id.checkedTextView, mPlayersList);
         convocatesListView.setAdapter(adapter);
         convocatesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -59,18 +60,23 @@ public class SelectConvocatesActivity extends AppCompatActivity {
             }
         });
 
+        Intent intent = getIntent();
+        mConvocates = intent.getStringArrayExtra(CONVOCATES);
+        if (mConvocates != null){
+            for (int i = 0; i < mConvocates.length; i++){
+                String player = mConvocates[i];
+                int index = mPlayersList.indexOf(player);
+                convocatesListView.setItemChecked(index, true);
+                selectedItems.add(player);
+            }
+        }
+
     }
 
     public void showSelectedItems(View v){
-        Log.i(TAG, "Selezionati: " + selectedItems);
-//        String items = "";
-//        for (String item : selectedItems){
-//            items += item + "\n";
-//        }
-        Toast.makeText(this, selectedItems.size() + " convocati", Toast.LENGTH_LONG).show();
-        String[] convocates = selectedItems.toArray(new String[selectedItems.size()]);
+        mConvocates = selectedItems.toArray(new String[selectedItems.size()]);
         Intent i = getIntent();
-        i.putExtra(CONVOCATES, convocates);
+        i.putExtra(CONVOCATES, mConvocates);
         setResult(RESULT_OK, i);
     }
 

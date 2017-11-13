@@ -1,12 +1,14 @@
 package com.bernardini.danilo.convocazioniriofreddo;
 
-import android.app.Activity;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
@@ -22,6 +24,7 @@ import java.util.Collections;
 
 public class PlayersActivity extends AppCompatActivity {
 
+    private static final String NAME = "name";
     private DBManager dbManager;
     private ArrayList<String> mPlayersList = new ArrayList<>();
     private ArrayAdapter<String> mAdapter;
@@ -38,9 +41,8 @@ public class PlayersActivity extends AppCompatActivity {
         Cursor result = dbManager.queryPlayers();
         result.moveToFirst();
         for (int i = 0; i < result.getCount(); i++){
-            String player = result.getString(result.getColumnIndex("name"));
+            String player = result.getString(result.getColumnIndex(NAME));
             mPlayersList.add(player);
-            Log.i("Players", "Gocatore: "+player);
             result.moveToNext();
         }
 

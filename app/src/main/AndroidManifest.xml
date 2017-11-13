@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.bernardini.danilo.convocazioniriofreddo">
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -20,10 +23,15 @@
             android:name=".AddCallActivity"
             android:parentActivityName=".MainActivity" />
         <activity
-            android:name=".SelectConvocatesActivity"
-            android:parentActivityName=".AddCallActivity" />
+            android:name=".SelectConvocatesActivity" />
         <activity
             android:name=".PlayersActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".InfoActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".CallActivity"
             android:parentActivityName=".MainActivity" />
     </application>
 
