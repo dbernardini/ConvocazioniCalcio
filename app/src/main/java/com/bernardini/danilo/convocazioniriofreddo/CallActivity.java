@@ -1,11 +1,14 @@
 package com.bernardini.danilo.convocazioniriofreddo;
 
+import android.Manifest;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Environment;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -28,6 +31,7 @@ import java.util.Date;
 public class CallActivity extends AppCompatActivity {
 
     private static final String TAG = "CallActivity";
+    public static final int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 13;
 
     private static final String HOME = "home";
     private static final String AWAY = "away";
@@ -157,20 +161,48 @@ public class CallActivity extends AppCompatActivity {
         int id = item.getItemId();
         switch (id) {
             case R.id.action_share:
-                LinearLayout rootView = (LinearLayout) findViewById(R.id.layout);
-                rootView.setDrawingCacheEnabled(true);
-                Bitmap b = getScreenShot(rootView);
-
-                Date now = new Date();
-                android.text.format.DateFormat.format("yyyy-MM-dd_hh:mm:ss", now);
-                File file = store(b, now + ".jpg");
-//                openScreenshot(file);
-                shareImage(file);
-
-                return true;
+                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) !=
+                        PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(this,
+                            new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                            PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
+                } else {
+                    takeScreenShot();
+                    return true;
+                }
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void takeScreenShot(){
+        LinearLayout rootView = (LinearLayout) findViewById(R.id.layout);
+        rootView.setDrawingCacheEnabled(true);
+        Bitmap bitmap = Bitmap.createBitmap(rootView.getDrawingCache());
+        rootView.setDrawingCacheEnabled(false);
+
+        Date now = new Date();
+        android.text.format.DateFormat.format("yyyy-MM-dd_hh:mm:ss", now);
+        File file = store(bitmap, now + ".jpg");
+//        openScreenshot(file);
+        shareImage(file);
+    }
+
+    private File store(Bitmap bm, String fileName){
+        final String dirPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Screenshots";
+        File dir = new File(dirPath);
+        if(!dir.exists())
+            dir.mkdirs();
+        File file = new File(dirPath, fileName);
+        try {
+            FileOutputStream fOut = new FileOutputStream(file);
+            bm.compress(Bitmap.CompressFormat.PNG, 85, fOut);
+            fOut.flush();
+            fOut.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return file;
     }
 
     private void shareImage(File file){
@@ -189,35 +221,20 @@ public class CallActivity extends AppCompatActivity {
         }
     }
 
-    public Bitmap getScreenShot(View view) {
-        view.setDrawingCacheEnabled(true);
-        Bitmap bitmap = Bitmap.createBitmap(view.getDrawingCache());
-        view.setDrawingCacheEnabled(false);
-        return bitmap;
-    }
+//    public Bitmap getScreenShot(View view) {
+//        view.setDrawingCacheEnabled(true);
+//        Bitmap bitmap = Bitmap.createBitmap(view.getDrawingCache());
+//        view.setDrawingCacheEnabled(false);
+//        return bitmap;
+//    }
 
-    public File store(Bitmap bm, String fileName){
-        final String dirPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Screenshots";
-        File dir = new File(dirPath);
-        if(!dir.exists())
-            dir.mkdirs();
-        File file = new File(dirPath, fileName);
-        try {
-            FileOutputStream fOut = new FileOutputStream(file);
-            bm.compress(Bitmap.CompressFormat.PNG, 85, fOut);
-            fOut.flush();
-            fOut.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return file;
-    }
 
-    private void openScreenshot(File imageFile) {
-        Intent intent = new Intent();
-        intent.setAction(Intent.ACTION_VIEW);
-        Uri uri = Uri.fromFile(imageFile);
-        intent.setDataAndType(uri, "image/*");
-        startActivity(intent);
-    }
+
+//    private void openScreenshot(File imageFile) {
+//        Intent intent = new Intent();
+//        intent.setAction(Intent.ACTION_VIEW);
+//        Uri uri = Uri.fromFile(imageFile);
+//        intent.setDataAndType(uri, "image/*");
+//        startActivity(intent);
+//    }
 }

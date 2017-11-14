@@ -7,16 +7,6 @@
     tools:context="com.bernardini.danilo.convocazioniriofreddo.SelectConvocatesActivity"
     android:orientation="vertical">
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Fatto"
-        android:layout_gravity="center_horizontal"
-        android:backgroundTint="@color/colorPrimary"
-        android:textColor="@android:color/white"
-        android:onClick="showSelectedItems"/>
-
     <ListView
         android:id="@+id/convocates_listview"
         android:layout_width="match_parent"

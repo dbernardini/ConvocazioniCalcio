@@ -42,7 +42,7 @@ public class CallsAdapter extends ArrayAdapter {
 
         if(home.equals("Virtus Ri.Va.") || home.contains("Riofreddo"))
             homeTextView.setTextColor(ContextCompat.getColor(context, R.color.colorPrimary));
-        if(away.equals("Virtus Ri.Va.") || home.contains("Riofreddo"))
+        if(away.equals("Virtus Ri.Va.") || away.contains("Riofreddo"))
             awayTextView.setTextColor(ContextCompat.getColor(context, R.color.colorPrimary));
 
         String date = call.getDate();

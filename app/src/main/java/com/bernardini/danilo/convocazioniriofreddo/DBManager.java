@@ -12,6 +12,8 @@ public class DBManager {
 
     private static final String TAG = "DBManager";
     private static final String PLAYERS = "players";
+    private static final String TEAMS = "teams";
+    private static final String TEAM_NAME = "team_name";
     private static final String CALLS = "calls";
     private static final String NAME = "name";
     private static final String HOME = "home";
@@ -49,6 +51,32 @@ public class DBManager {
         Cursor cursor = db.query(
                 PLAYERS,
                 new String[] { NAME },
+                null, null, null, null, null, null);
+
+        return cursor;
+    }
+
+    public void insertTeam(String team){
+        SQLiteDatabase db = mDbHelper.getWritableDatabase();
+
+        ContentValues cv = new ContentValues();
+        cv.put(TEAM_NAME, team);
+
+        db.insert(TEAMS, null, cv);
+    }
+
+    public boolean deleteTeam(String team) {
+        SQLiteDatabase db = mDbHelper.getWritableDatabase();
+        if (db.delete(TEAMS, TEAM_NAME + "=?", new String[]{team}) > 0)
+            return true;
+        else return false;
+    }
+
+    public Cursor queryTeams() {
+        SQLiteDatabase db = mDbHelper.getReadableDatabase();
+        Cursor cursor = db.query(
+                TEAMS,
+                new String[] { TEAM_NAME },
                 null, null, null, null, null, null);
 
         return cursor;
@@ -94,7 +122,7 @@ public class DBManager {
         Cursor cursor = db.query(
                 CALLS,
                 new String[] { HOME,AWAY,DATE,PLACE,CALL_PLACE,CALL_TIME,NOTES },
-                null, null, null, null, null, null);
+                null, null, null, null, DATE + " DESC");
 
         return cursor;
     }

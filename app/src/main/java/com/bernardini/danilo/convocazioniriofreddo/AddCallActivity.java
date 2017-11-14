@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
@@ -23,13 +24,16 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 
 import static android.R.id.list;
 
 public class AddCallActivity extends AppCompatActivity {
 
     private static final String TAG = "AddCallActivity";
+    private static final String TEAM_NAME = "team_name";
     private static final int SELECT_CONVOCATES = 1;
     private static final String CONVOCATES = "convocates";
     private static TextView mConvocatesNumber;
@@ -64,9 +68,22 @@ public class AddCallActivity extends AppCompatActivity {
         mNotes = (EditText) findViewById(R.id.notes);
         mConvocatesNumber = (TextView) findViewById(R.id.convocates_number);
 
+        ArrayList<String> teamsList = new ArrayList<>();
+        DBManager dbManager = new DBManager(this);
+        Cursor result = dbManager.queryTeams();
+        result.moveToFirst();
+        for (int i = 0; i < result.getCount(); i++){
+            String team = result.getString(result.getColumnIndex(TEAM_NAME));
+            teamsList.add(team);
+            result.moveToNext();
+        }
+        if (!teamsList.isEmpty())
+            Collections.sort(teamsList.subList(0, teamsList.size()));
+
         Spinner homeSpinner = (Spinner) findViewById(R.id.home_spinner);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.teams, android.R.layout.simple_spinner_item);
+//        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+//                teamsList, android.R.layout.simple_spinner_item);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(AddCallActivity.this, android.R.layout.simple_spinner_item, teamsList);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         homeSpinner.setPrompt("Squadra di casa");
         homeSpinner.setAdapter(
@@ -116,19 +133,27 @@ public class AddCallActivity extends AppCompatActivity {
         int id = item.getItemId();
         switch (id) {
             case R.id.action_save:
-                Toast.makeText(this, "Convocazione salvata", Toast.LENGTH_SHORT).show();
-
-                DBManager dbManager = new DBManager(this);
-                dbManager.insertCall(mHome.getSelectedItem().toString(),
-                        mAway.getSelectedItem().toString(), mDateTime.getText().toString(),
-                        mMatchPlace.getText().toString(), mCallPlace.getText().toString(),
-                        mCallTime.getText().toString(), mNotes.getText().toString());
-
-                for (String convocate : mConvocates){
-                    dbManager.insertPlayersCalled(convocate, mDateTime.getText().toString());
+                if (mHome.getSelectedItem() == null ||
+                        mAway.getSelectedItem() == null ||
+                        mDateTime.getText().toString().equals("")){
+                    Toast.makeText(this, "Riempi i campi mancanti!", Toast.LENGTH_LONG).show();
                 }
+                else if (mConvocates == null){
+                    Toast.makeText(this, "Seleziona i convocati!", Toast.LENGTH_LONG).show();
+                }
+                else {
+                    DBManager dbManager = new DBManager(this);
+                    dbManager.insertCall(mHome.getSelectedItem().toString(),
+                            mAway.getSelectedItem().toString(), mDateTime.getText().toString(),
+                            mMatchPlace.getText().toString(), mCallPlace.getText().toString(),
+                            mCallTime.getText().toString(), mNotes.getText().toString());
 
-
+                    for (String convocate : mConvocates) {
+                        dbManager.insertPlayersCalled(convocate, mDateTime.getText().toString());
+                    }
+                    Toast.makeText(this, "Convocazione salvata", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -176,11 +201,14 @@ public class AddCallActivity extends AppCompatActivity {
                     public void onTimeSet(TimePicker view, int hourOfDay,int minute) {
 
                         mHour = hourOfDay;
+                        String hour = Integer.toString(hourOfDay);
+                        if (hour.length() == 1)
+                            hour = "0" + hour;
                         mMinute = minute;
                         String min = Integer.toString(minute);
-                        if (min.equals("0"))
-                            min = "00";
-                        mDateTime.setText(date_time+", "+hourOfDay + ":" + min);
+                        if (min.length() == 1)
+                            min = "0" + min;
+                        mDateTime.setText(date_time + ", " + hour + ":" + min);
                     }
                 }, mHour, mMinute, true);
         timePickerDialog.show();

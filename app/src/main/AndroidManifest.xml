@@ -22,8 +22,7 @@
         <activity
             android:name=".AddCallActivity"
             android:parentActivityName=".MainActivity" />
-        <activity
-            android:name=".SelectConvocatesActivity" />
+        <activity android:name=".SelectConvocatesActivity" />
         <activity
             android:name=".PlayersActivity"
             android:parentActivityName=".MainActivity" />
@@ -32,6 +31,9 @@
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".CallActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".TeamsActivity"
             android:parentActivityName=".MainActivity" />
     </application>
 

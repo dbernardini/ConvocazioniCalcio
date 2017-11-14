@@ -13,7 +13,10 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String TAG = "DBHelper";
     private static final String CALLS = "calls";
     private static final String PLAYERS = "players";
+    private static final String TEAMS = "teams";
     private static final String PLAYER_ID = "player_id";
+    private static final String TEAM_ID = "team_id";
+    private static final String TEAM_NAME = "team_name";
     private static final String NAME = "name";
     private static final String HOME = "home";
     private static final String AWAY = "away";
@@ -28,6 +31,11 @@ public class DBHelper extends SQLiteOpenHelper {
             "CREATE TABLE IF NOT EXISTS " + PLAYERS + " (" +
                     PLAYER_ID + " INT AUTO_INCREMENT PRIMARY KEY," +
                     NAME + " TEXT )";
+
+    public static final String CREATE_TABLE_TEAMS =
+            "CREATE TABLE IF NOT EXISTS " + TEAMS + " (" +
+                    TEAM_ID + " INT AUTO_INCREMENT PRIMARY KEY," +
+                    TEAM_NAME + " TEXT )";
 
     public static final String CREATE_TABLE_CALLS =
             "CREATE TABLE IF NOT EXISTS " + CALLS + " (" +
@@ -49,6 +57,7 @@ public class DBHelper extends SQLiteOpenHelper {
                     ")";
 
     public static final String DELETE_TABLE_PLAYERS = "DROP TABLE IF EXISTS " + PLAYERS;
+    public static final String DELETE_TABLE_TEAMS = "DROP TABLE IF EXISTS " + TEAMS;
     public static final String DELETE_TABLE_CALLS = "DROP TABLE IF EXISTS " + CALLS;
     public static final String DELETE_TABLE_PLAYERS_CALLED = "DROP TABLE IF EXISTS " + PLAYERS_CALLED;
 
@@ -60,6 +69,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         Log.d(TAG, "onCreate()");
         db.execSQL(CREATE_TABLE_PLAYERS);
+        db.execSQL(CREATE_TABLE_TEAMS);
         db.execSQL(CREATE_TABLE_CALLS);
         db.execSQL(CREATE_TABLE_PLAYERS_CALLED);
     }

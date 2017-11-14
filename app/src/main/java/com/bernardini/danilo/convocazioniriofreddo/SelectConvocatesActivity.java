@@ -5,6 +5,8 @@ import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -73,11 +75,29 @@ public class SelectConvocatesActivity extends AppCompatActivity {
 
     }
 
-    public void showSelectedItems(View v){
-        mConvocates = selectedItems.toArray(new String[selectedItems.size()]);
-        Intent i = getIntent();
-        i.putExtra(CONVOCATES, mConvocates);
-        setResult(RESULT_OK, i);
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_call, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.action_save:
+                int convocatesNumber = selectedItems.size();
+                mConvocates = selectedItems.toArray(new String[convocatesNumber]);
+                Intent i = getIntent();
+                i.putExtra(CONVOCATES, mConvocates);
+                setResult(RESULT_OK, i);
+                finish();
+                Toast.makeText(this, "Selezionati " + convocatesNumber +  " convocati",
+                        Toast.LENGTH_SHORT).show();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
 

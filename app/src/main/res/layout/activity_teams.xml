@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout 
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.bernardini.danilo.convocazioniriofreddo.PlayersActivity"
+    tools:context="com.bernardini.danilo.convocazioniriofreddo.TeamsActivity"
     android:orientation="vertical">
 
     <LinearLayout
@@ -22,16 +22,16 @@
             android:layout_weight="1">
 
             <EditText
-                android:id="@+id/add_player"
+                android:id="@+id/add_team"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textCapWords"
-                android:hint="Aggiungi giocatore"/>
+                android:hint="Aggiungi squadra"/>
 
         </android.support.design.widget.TextInputLayout>
 
         <Button
-            android:id="@+id/add_player_button"
+            android:id="@+id/add_team_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Aggiungi"
@@ -41,12 +41,12 @@
     </LinearLayout>
 
     <ListView
-        android:id="@+id/players_list"
+        android:id="@+id/teams_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp">
 
     </ListView>
-    
+
 </LinearLayout>
