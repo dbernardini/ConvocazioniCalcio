@@ -42,8 +42,7 @@
                     android:textStyle="bold"
                     android:textColor="#212121"
                     android:lines="2"
-                    android:ellipsize="end"
-                    android:text="Virtus Ri.Va."/>
+                    android:ellipsize="end"/>
 
                 <TextView
                     android:id="@+id/vs"
@@ -66,8 +65,7 @@
                     android:textStyle="bold"
                     android:textColor="#212121"
                     android:lines="2"
-                    android:ellipsize="end"
-                    android:text="Nuova Leonina Pietralata"/>
+                    android:ellipsize="end"/>
 
             </LinearLayout>
 
@@ -75,7 +73,6 @@
                 android:id="@+id/date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="12/11/2017"
                 android:gravity="center_horizontal"
                 android:textColor="#212121"/>
 

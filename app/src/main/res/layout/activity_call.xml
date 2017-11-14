@@ -37,7 +37,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingTop="10dp"
-                    android:paddingStart="10dp"
                     android:layout_gravity="center_horizontal"
                     android:textAllCaps="true"
                     android:text="Partita"
@@ -64,8 +63,7 @@
                         android:textStyle="bold"
                         android:textColor="#212121"
                         android:lines="2"
-                        android:ellipsize="end"
-                        android:text="Virtus Ri.Va."/>
+                        android:ellipsize="end"/>
 
                     <TextView
                         android:id="@+id/vs"
@@ -88,8 +86,7 @@
                         android:textStyle="bold"
                         android:textColor="#212121"
                         android:lines="2"
-                        android:ellipsize="end"
-                        android:text="Nuova Leonina Pietralata"/>
+                        android:ellipsize="end"/>
 
                 </LinearLayout>
 
@@ -106,7 +103,6 @@
                         android:id="@+id/date"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="12 dicembre 2017, 15:30"
                         android:textSize="16sp"
                         android:gravity="center_horizontal"
                         android:textColor="#212121"/>
@@ -115,7 +111,6 @@
                         android:id="@+id/place"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="La Crocetta"
                         android:gravity="center_horizontal"
                         android:textColor="#757575"/>
 
@@ -145,7 +140,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingTop="10dp"
-                    android:paddingStart="10dp"
                     android:layout_gravity="center_horizontal"
                     android:textAllCaps="true"
                     android:text="Convocazione"
@@ -169,7 +163,7 @@
                         android:textSize="16sp"
                         android:textStyle="bold"
                         android:textColor="#757575"
-                        android:text="Ritrovo: Rio Bar"/>
+                        android:text="Ritrovo:"/>
 
                     <TextView
                         android:id="@+id/call_time"
@@ -180,7 +174,7 @@
                         android:textSize="16sp"
                         android:textStyle="bold"
                         android:textColor="#757575"
-                        android:text="Ore 14:00"/>
+                        android:text="Ore:"/>
 
                 </LinearLayout>
 
@@ -192,16 +186,16 @@
                     android:paddingTop="5dp"
                     android:paddingBottom="10dp"
                     android:paddingStart="10dp"
-                    android:paddingEnd="10dp"
-                    android:text="Ricordatevi il documento"/>
+                    android:paddingEnd="10dp"/>
 
                 <GridView
                     android:id="@+id/convocates_list"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
                     android:paddingStart="10dp"
                     android:paddingEnd="10dp"
-                    android:numColumns="2">
+                    android:numColumns="3">
                 </GridView>
 
             </LinearLayout>

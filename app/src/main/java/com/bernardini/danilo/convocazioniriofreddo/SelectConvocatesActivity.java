@@ -12,7 +12,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -23,7 +22,6 @@ public class SelectConvocatesActivity extends AppCompatActivity {
     private static final String NAME = "name";
     private ArrayList<String> mPlayersList = new ArrayList<>();
     ArrayList<String> selectedItems = new ArrayList<>();
-    private DBManager dbManager;
     private String[] mConvocates;
 
     @Override
@@ -34,7 +32,7 @@ public class SelectConvocatesActivity extends AppCompatActivity {
         ListView convocatesListView = (ListView) findViewById(R.id.convocates_listview);
         convocatesListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
 
-        dbManager = new DBManager(this);
+        DBManager dbManager = new DBManager(this);
         Cursor result = dbManager.queryPlayers();
         result.moveToFirst();
         for (int i = 0; i < result.getCount(); i++){
@@ -72,7 +70,6 @@ public class SelectConvocatesActivity extends AppCompatActivity {
                 selectedItems.add(player);
             }
         }
-
     }
 
     @Override
@@ -92,8 +89,8 @@ public class SelectConvocatesActivity extends AppCompatActivity {
                 i.putExtra(CONVOCATES, mConvocates);
                 setResult(RESULT_OK, i);
                 finish();
-                Toast.makeText(this, "Selezionati " + convocatesNumber +  " convocati",
-                        Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this, "Selezionati " + convocatesNumber +  " convocati",
+//                        Toast.LENGTH_SHORT).show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

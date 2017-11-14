@@ -10,7 +10,6 @@ import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.format.DateFormat;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,7 +17,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -27,8 +25,6 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
-
-import static android.R.id.list;
 
 public class AddCallActivity extends AppCompatActivity {
 
@@ -46,9 +42,6 @@ public class AddCallActivity extends AppCompatActivity {
     private static EditText mCallTime;
     private EditText mNotes;
 
-    private int mYear;
-    private int mMonth;
-    private int mDay;
     private int mHour;
     private int mMinute;
     private String date_time;
@@ -81,8 +74,6 @@ public class AddCallActivity extends AppCompatActivity {
             Collections.sort(teamsList.subList(0, teamsList.size()));
 
         Spinner homeSpinner = (Spinner) findViewById(R.id.home_spinner);
-//        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-//                teamsList, android.R.layout.simple_spinner_item);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(AddCallActivity.this, android.R.layout.simple_spinner_item, teamsList);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         homeSpinner.setPrompt("Squadra di casa");
@@ -163,9 +154,9 @@ public class AddCallActivity extends AppCompatActivity {
     public void datePicker(View v){
         // Get Current Date
         final Calendar c = Calendar.getInstance();
-        mYear = c.get(Calendar.YEAR);
-        mMonth = c.get(Calendar.MONTH);
-        mDay = c.get(Calendar.DAY_OF_MONTH);
+        int mYear = c.get(Calendar.YEAR);
+        int mMonth = c.get(Calendar.MONTH);
+        int mDay = c.get(Calendar.DAY_OF_MONTH);
 
         DatePickerDialog datePickerDialog = new DatePickerDialog(this,
                 new DatePickerDialog.OnDateSetListener() {

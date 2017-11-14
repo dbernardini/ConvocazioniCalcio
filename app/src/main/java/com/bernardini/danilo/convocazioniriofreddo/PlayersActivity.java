@@ -62,7 +62,7 @@ public class PlayersActivity extends AppCompatActivity {
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
                 String clicked = mPlayersList.get(i);
                 startConfirmationDialog(clicked);
-                return false;
+                return true;
             }
         });
         mAdapter = new ArrayAdapter<>(this, R.layout.list_item, mPlayersList);

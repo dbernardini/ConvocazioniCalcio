@@ -4,9 +4,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
-
-import java.util.Date;
 
 public class DBManager {
 
@@ -105,14 +102,8 @@ public class DBManager {
     }
 
     public boolean deleteCall(String dateTime) {
-        String year = dateTime.substring(6,10);
-        String month = dateTime.substring(3,5);
-        String day = dateTime.substring(0,2);
-        String time = dateTime.substring(12) + ":00";
-        String date = year + "-" + month + "-" + day + " " + time;
-
         SQLiteDatabase db = mDbHelper.getWritableDatabase();
-        if (db.delete(CALLS, DATE + "=?", new String[]{date}) > 0)
+        if (db.delete(CALLS, DATE + "=?", new String[]{dateTime}) > 0)
             return true;
         else return false;
     }

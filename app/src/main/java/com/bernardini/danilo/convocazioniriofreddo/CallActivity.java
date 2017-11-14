@@ -11,15 +11,12 @@ import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
+import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -59,6 +56,7 @@ public class CallActivity extends AppCompatActivity {
         String callTime = "";
         String notes = "";
         ArrayList<String> convocates = new ArrayList<>();
+        ArrayList<String> players = new ArrayList<>();
 
         TextView homeTextView = (TextView) findViewById(R.id.home);
         TextView awayTextView = (TextView) findViewById(R.id.away);
@@ -79,6 +77,14 @@ public class CallActivity extends AppCompatActivity {
             callPlace = cursor.getString(cursor.getColumnIndex(CALL_PLACE));
             callTime = cursor.getString(cursor.getColumnIndex(CALL_TIME));
             notes = cursor.getString(cursor.getColumnIndex(NOTES));
+            cursor.moveToNext();
+        }
+
+        cursor = dbManager.queryPlayers();
+        cursor.moveToFirst();
+        for (int i = 0; i < cursor.getCount(); i++){
+            String player = cursor.getString(cursor.getColumnIndex(NAME));
+            players.add(player);
             cursor.moveToNext();
         }
 
@@ -145,8 +151,17 @@ public class CallActivity extends AppCompatActivity {
         callTimeTextView.setText("Orario: " + callTime);
         notesTextView.setText(notes);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.convocates_list_item, convocates);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.called_player_item, players);
         convocatesGridView.setAdapter(adapter);
+
+        convocatesGridView.setChoiceMode(AbsListView.CHOICE_MODE_MULTIPLE);
+
+        convocatesGridView.setEnabled(false);
+
+        for (String convocate : convocates){
+            int index = players.indexOf(convocate);
+            convocatesGridView.setItemChecked(index, true);
+        }
 
     }
 
@@ -184,7 +199,6 @@ public class CallActivity extends AppCompatActivity {
         Date now = new Date();
         android.text.format.DateFormat.format("yyyy-MM-dd_hh:mm:ss", now);
         File file = store(bitmap, now + ".jpg");
-//        openScreenshot(file);
         shareImage(file);
     }
 
@@ -220,21 +234,4 @@ public class CallActivity extends AppCompatActivity {
             Toast.makeText(this, "Nessuna app per la condivisione disponibile", Toast.LENGTH_SHORT).show();
         }
     }
-
-//    public Bitmap getScreenShot(View view) {
-//        view.setDrawingCacheEnabled(true);
-//        Bitmap bitmap = Bitmap.createBitmap(view.getDrawingCache());
-//        view.setDrawingCacheEnabled(false);
-//        return bitmap;
-//    }
-
-
-
-//    private void openScreenshot(File imageFile) {
-//        Intent intent = new Intent();
-//        intent.setAction(Intent.ACTION_VIEW);
-//        Uri uri = Uri.fromFile(imageFile);
-//        intent.setDataAndType(uri, "image/*");
-//        startActivity(intent);
-//    }
 }

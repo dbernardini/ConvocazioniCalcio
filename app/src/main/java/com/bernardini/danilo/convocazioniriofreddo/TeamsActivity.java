@@ -62,7 +62,7 @@ public class TeamsActivity extends AppCompatActivity {
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
                 String clicked = mTeamsList.get(i);
                 startConfirmationDialog(clicked);
-                return false;
+                return true;
             }
         });
         mAdapter = new ArrayAdapter<>(this, R.layout.list_item, mTeamsList);

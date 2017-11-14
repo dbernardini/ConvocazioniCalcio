@@ -9,6 +9,15 @@
     android:background="#EAEAEA"
     tools:context="com.bernardini.danilo.convocazioniriofreddo.MainActivity">
 
+    <TextView
+        android:id="@+id/no_calls"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textSize="16sp"
+        android:text="Nessuna convocazione inserita"
+        android:gravity="center"
+        android:visibility="invisible"/>
+
     <ListView
         android:id="@+id/calls_list"
         android:layout_width="match_parent"

@@ -1,17 +1,3 @@
 <resources>
     <string name="app_name">Convocazioni</string>
-    <string-array name="teams">
-        <item>Anticoli Corrado 1966</item>
-        <item>Arcinazzo Romano</item>
-        <item>Arsoli</item>
-        <item>Cavaliere Camerata</item>
-        <item>Città di Castelmadama 1968</item>
-        <item>Nuova Leonina Pietralata</item>
-        <item>Polisportiva Mandela</item>
-        <item>Rocca Santo Stefano</item>
-        <item>Sporting San Lorenzo</item>
-        <item>Supreme Sport Village</item>
-        <item>Villa Gordiani</item>
-        <item>Virtus Ri.Va.</item>
-    </string-array>
 </resources>

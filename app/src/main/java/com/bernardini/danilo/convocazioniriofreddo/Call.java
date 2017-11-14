@@ -1,7 +1,5 @@
 package com.bernardini.danilo.convocazioniriofreddo;
 
-import java.util.Arrays;
-
 public class Call {
 
     private String home;
@@ -11,18 +9,6 @@ public class Call {
     private String callPlace;
     private String callTime;
     private String notes;
-    private String[] convocates;
-
-    public Call(String home, String away, String place, String date, String callPlace, String callTime, String notes, String[] convocates) {
-        this.home = home;
-        this.away = away;
-        this.place = place;
-        this.date = date;
-        this.callPlace = callPlace;
-        this.callTime = callTime;
-        this.notes = notes;
-        this.convocates = convocates;
-    }
 
     public Call(String home, String away, String place, String date, String callPlace, String callTime, String notes) {
         this.home = home;
@@ -32,17 +18,6 @@ public class Call {
         this.callPlace = callPlace;
         this.callTime = callTime;
         this.notes = notes;
-        this.convocates = convocates;
-    }
-
-    public Call(String home, String away, String place, String date, String callPlace, String callTime, String[] convocates) {
-        this.home = home;
-        this.away = away;
-        this.place = place;
-        this.date = date;
-        this.callPlace = callPlace;
-        this.callTime = callTime;
-        this.convocates = convocates;
     }
 
     public String getHome() {
@@ -101,14 +76,6 @@ public class Call {
         this.notes = notes;
     }
 
-    public String[] getConvocates() {
-        return convocates;
-    }
-
-    public void setConvocates(String[] convocates) {
-        this.convocates = convocates;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -149,8 +116,7 @@ public class Call {
                 ", date='" + date + '\'' +
                 ", callPlace='" + callPlace + '\'' +
                 ", callTime='" + callTime + '\'' +
-                ", notes='" + notes + '\'' +
-                ", convocates=" + Arrays.toString(convocates) +
+                ", notes='" + notes +
                 '}';
     }
 }
