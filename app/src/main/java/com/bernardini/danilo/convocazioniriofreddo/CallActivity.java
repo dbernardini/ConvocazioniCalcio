@@ -196,9 +196,7 @@ public class CallActivity extends AppCompatActivity {
         Bitmap bitmap = Bitmap.createBitmap(rootView.getDrawingCache());
         rootView.setDrawingCacheEnabled(false);
 
-        Date now = new Date();
-        android.text.format.DateFormat.format("yyyy-MM-dd_hh:mm:ss", now);
-        File file = store(bitmap, now + ".jpg");
+        File file = store(bitmap, "convocazione" + ".jpg");
         shareImage(file);
     }
 
