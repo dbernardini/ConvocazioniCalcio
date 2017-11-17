@@ -54,7 +54,6 @@ public class MainActivity extends AppCompatActivity {
             dbManager.insertPlayer("Artibani Giuseppe");
             dbManager.insertPlayer("Basile Gianluca");
             dbManager.insertPlayer("Cicchetti Simone");
-            dbManager.insertPlayer("Cococcia Angelo");
             dbManager.insertPlayer("Colombi Alfredo");
             dbManager.insertPlayer("Conti Stefano");
             dbManager.insertPlayer("Costanzo Salvatore");
@@ -62,7 +61,6 @@ public class MainActivity extends AppCompatActivity {
             dbManager.insertPlayer("D'Antimi Matteo");
             dbManager.insertPlayer("D'Antimi Stefano");
             dbManager.insertPlayer("D'Auria Andrea");
-            dbManager.insertPlayer("De Santis Filippo");
             dbManager.insertPlayer("De Santis Mattia");
             dbManager.insertPlayer("Dessì Flavio");
             dbManager.insertPlayer("Giustini Daniele");
@@ -92,61 +90,6 @@ public class MainActivity extends AppCompatActivity {
             dbManager.insertTeam("Supreme Sport Village");
             dbManager.insertTeam("Villa Gordiani");
         }
-//        result = dbManager.queryCalls();
-//        result.moveToFirst();
-//        if (result.getCount() == 0){
-//            dbManager.insertCall("Virtus Ri.Va.", "Cavaliere Camerata","25/11/2010, 15:30","La Crocetta","Bar","14:30","Puntuali");
-//            dbManager.insertCall("Arsoli", "Virtus Ri.Va.","25/11/2017, 15:30","Arsoli","Bar","14:30","Ricordatevi il documento");
-//            dbManager.insertCall("Virtus Ri.Va.", "Rocca Santo Stefano","10/12/2009, 15:00","La Crocetta","Bar","14:30","");
-//            dbManager.insertCall("Città di Castelmadama 1968", "Virtus Ri.Va.","17/12/2015, 15:00","La Crocetta","Bar","14:30","");
-//            dbManager.insertCall("Virtus Ri.Va.", "Arcinazzo Romano","14/01/2014, 15:30","La Crocetta","Bar","14:30","");
-//            dbManager.insertCall("Villa Gordiani", "Virtus Ri.Va.","25/11/2008, 15:30","La Crocetta","Bar","14:30","");
-//
-////            dbManager.insertCall("Virtus Ri.Va.", "Cavaliere Camerata","25/11/2018, 15:30","La Crocetta","Bar","14:30","");
-////            dbManager.insertCall("Arsoli", "Virtus Ri.Va.","03/12/2018, 15:30","Arsoli","Bar","14:30","");
-////            dbManager.insertCall("Virtus Ri.Va.", "Rocca Santo Stefano","10/12/2018, 15:00","La Crocetta","Bar","14:30","");
-////            dbManager.insertCall("Città di Castelmadama 1968", "Virtus Ri.Va.","17/12/2018, 15:00","La Crocetta","Bar","14:30","");
-////            dbManager.insertCall("Virtus Ri.Va.", "Arcinazzo Romano","14/01/2017, 15:30","La Crocetta","Bar","14:30","");
-////            dbManager.insertCall("Villa Gordiani", "Virtus Ri.Va.","25/11/2018, 15:30","La Crocetta","Bar","14:30","");
-////
-////            dbManager.insertCall("Virtus Ri.Va.", "Cavaliere Camerata","25/11/2019, 15:30","La Crocetta","Bar","14:30","");
-////            dbManager.insertCall("Arsoli", "Virtus Ri.Va.","03/12/2019, 15:30","Arsoli","Bar","14:30","");
-////            dbManager.insertCall("Virtus Ri.Va.", "Rocca Santo Stefano","10/12/2019, 15:00","La Crocetta","Bar","14:30","");
-////            dbManager.insertCall("Città di Castelmadama 1968", "Virtus Ri.Va.","17/12/2019, 15:00","La Crocetta","Bar","14:30","");
-////            dbManager.insertCall("Virtus Ri.Va.", "Arcinazzo Romano","14/01/2019, 15:30","La Crocetta","Bar","14:30","");
-////            dbManager.insertCall("Villa Gordiani", "Virtus Ri.Va.","25/11/2019, 15:30","La Crocetta","Bar","14:30","");
-//        }
-//        result = dbManager.queryPlayersCalled();
-//        result.moveToFirst();
-//        if (result.getCount() == 0) {
-//            dbManager.insertPlayersCalled("Alivernini Marco", "25/11/2017, 15:30");
-//            dbManager.insertPlayersCalled("Artibani Francesco", "25/11/2017, 15:30");
-////            dbManager.insertPlayersCalled("Artibani Giuseppe", "25/11/2017, 15:30");
-//            dbManager.insertPlayersCalled("Basile Gianluca", "25/11/2017, 15:30");
-//            dbManager.insertPlayersCalled("Cicchetti Simone", "25/11/2017, 15:30");
-////            dbManager.insertPlayersCalled("Cococcia Angelo", "25/11/2017, 15:30");
-//            dbManager.insertPlayersCalled("Colombi Alfredo", "25/11/2017, 15:30");
-//            dbManager.insertPlayersCalled("Conti Stefano", "25/11/2017, 15:30");
-////            dbManager.insertPlayersCalled("Costanzo Salvatore", "25/11/2017, 15:30");
-//            dbManager.insertPlayersCalled("D'Antimi Alessio", "25/11/2017, 15:30");
-//            dbManager.insertPlayersCalled("D'Antimi Matteo", "25/11/2017, 15:30");
-//            dbManager.insertPlayersCalled("D'Antimi Stefano", "25/11/2017, 15:30");
-//            dbManager.insertPlayersCalled("D'Auria Andrea", "25/11/2017, 15:30");
-////            dbManager.insertPlayersCalled("De Santis Filippo", "25/11/2017, 15:30");
-////            dbManager.insertPlayersCalled("De Santis Mattia", "25/11/2017, 15:30");
-////            dbManager.insertPlayersCalled("Dessì Flavio", "25/11/2017, 15:30");
-//            dbManager.insertPlayersCalled("Giustini Daniele", "25/11/2017, 15:30");
-//            dbManager.insertPlayersCalled("Giustini Patrizio", "25/11/2017, 15:30");
-//
-//            dbManager.insertPlayersCalled("Masci Antonio", "25/11/2017, 15:30");
-//            dbManager.insertPlayersCalled("Palma Mario", "25/11/2017, 15:30");
-//            dbManager.insertPlayersCalled("Portieri Emanuele", "25/11/2017, 15:30");
-////            dbManager.insertPlayersCalled("Rainaldi Daniele (78)", "25/11/2017, 15:30");
-//            dbManager.insertPlayersCalled("Rainaldi Daniele (97)", "25/11/2017, 15:30");
-//            dbManager.insertPlayersCalled("Saccucci Valerio", "25/11/2017, 15:30");
-////            dbManager.insertPlayersCalled("Sebastiani Alessandro", "25/11/2017, 15:30");
-//            dbManager.insertPlayersCalled("Sebastiani Francesco", "25/11/2017, 15:30");
-//        }
 
         executeOnResume = false;
 

@@ -11,6 +11,7 @@ import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AbsListView;
@@ -23,6 +24,7 @@ import android.widget.Toast;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 
 public class CallActivity extends AppCompatActivity {
@@ -90,9 +92,11 @@ public class CallActivity extends AppCompatActivity {
 
         cursor = dbManager.queryPlayersCalled(date);
         cursor.moveToFirst();
+        Log.d(TAG, "AAAAAAAAAAA");
         for (int i = 0; i < cursor.getCount(); i++) {
             String player = cursor.getString(cursor.getColumnIndex(NAME));
             convocates.add(player);
+            Log.d(TAG, player);
             cursor.moveToNext();
         }
 
@@ -156,7 +160,7 @@ public class CallActivity extends AppCompatActivity {
 
         convocatesGridView.setChoiceMode(AbsListView.CHOICE_MODE_MULTIPLE);
 
-        convocatesGridView.setEnabled(false);
+//        convocatesGridView.setEnabled(false);
 
         for (String convocate : convocates){
             int index = players.indexOf(convocate);

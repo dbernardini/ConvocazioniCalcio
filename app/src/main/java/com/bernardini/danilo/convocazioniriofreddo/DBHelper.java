@@ -68,6 +68,10 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         Log.d(TAG, "onCreate()");
+        db.execSQL(DELETE_TABLE_PLAYERS);
+        db.execSQL(DELETE_TABLE_TEAMS);
+        db.execSQL(DELETE_TABLE_CALLS);
+        db.execSQL(DELETE_TABLE_PLAYERS_CALLED);
         db.execSQL(CREATE_TABLE_PLAYERS);
         db.execSQL(CREATE_TABLE_TEAMS);
         db.execSQL(CREATE_TABLE_CALLS);

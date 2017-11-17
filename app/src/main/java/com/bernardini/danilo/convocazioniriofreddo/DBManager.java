@@ -48,7 +48,7 @@ public class DBManager {
         Cursor cursor = db.query(
                 PLAYERS,
                 new String[] { NAME },
-                null, null, null, null, null, null);
+                null, null, null, null, NAME + " ASC");
 
         return cursor;
     }
