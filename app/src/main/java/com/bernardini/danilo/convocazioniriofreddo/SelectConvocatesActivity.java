@@ -40,8 +40,10 @@ public class SelectConvocatesActivity extends AppCompatActivity {
             mPlayersList.add(player);
             result.moveToNext();
         }
-        if (!mPlayersList.isEmpty())
-            Collections.sort(mPlayersList.subList(0, mPlayersList.size()));
+        if (!mPlayersList.isEmpty()) {
+            Collections.sort(mPlayersList, new PlayersComparator());
+            //Collections.sort(mPlayersList.subList(0, mPlayersList.size()));
+        }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.call_list_item,
                 R.id.checkedTextView, mPlayersList);

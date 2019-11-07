@@ -8,6 +8,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Environment;
+import android.os.StrictMode;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -25,6 +26,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 
 public class CallActivity extends AppCompatActivity {
@@ -47,6 +49,9 @@ public class CallActivity extends AppCompatActivity {
         setContentView(R.layout.activity_call);
 
         getSupportActionBar().setTitle("Convocazione");
+
+        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+        StrictMode.setVmPolicy(builder.build());
 
         Intent intent = getIntent();
         String date = intent.getStringExtra(DATE);
@@ -90,9 +95,10 @@ public class CallActivity extends AppCompatActivity {
             cursor.moveToNext();
         }
 
+        Collections.sort(players, new PlayersComparator());
+
         cursor = dbManager.queryPlayersCalled(date);
         cursor.moveToFirst();
-        Log.d(TAG, "AAAAAAAAAAA");
         for (int i = 0; i < cursor.getCount(); i++) {
             String player = cursor.getString(cursor.getColumnIndex(NAME));
             convocates.add(player);

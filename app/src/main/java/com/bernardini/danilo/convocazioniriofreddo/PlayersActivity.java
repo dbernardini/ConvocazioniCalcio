@@ -47,8 +47,9 @@ public class PlayersActivity extends AppCompatActivity {
         }
 
         ListView playersListView = (ListView) findViewById(R.id.players_list);
-        if (!mPlayersList.isEmpty())
-            Collections.sort(mPlayersList.subList(0, mPlayersList.size()));
+        if (!mPlayersList.isEmpty()) {
+            Collections.sort(mPlayersList, new PlayersComparator());
+        }
         playersListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -79,8 +80,10 @@ public class PlayersActivity extends AppCompatActivity {
                 playerEditText.setText("");
 //                playerEditText.clearFocus();
                 mPlayersList.add(newPlayer);
-                if (!mPlayersList.isEmpty())
-                    Collections.sort(mPlayersList.subList(0, mPlayersList.size()));
+                if (!mPlayersList.isEmpty()) {
+                    Collections.sort(mPlayersList, new PlayersComparator());
+                    //Collections.sort(mPlayersList.subList(0, mPlayersList.size()));
+                }
                 mAdapter.notifyDataSetChanged();
             }
         });

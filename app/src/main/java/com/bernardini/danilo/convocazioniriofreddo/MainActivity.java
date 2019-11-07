@@ -46,50 +46,50 @@ public class MainActivity extends AppCompatActivity {
         mNoCallsTextView = (TextView) findViewById(R.id.no_calls);
 
         dbManager = new DBManager(this);
-        Cursor result = dbManager.queryPlayers();
-        result.moveToFirst();
-        if (result.getCount() == 0){
-            dbManager.insertPlayer("Alivernini Marco");
-            dbManager.insertPlayer("Artibani Francesco");
-            dbManager.insertPlayer("Artibani Giuseppe");
-            dbManager.insertPlayer("Basile Gianluca");
-            dbManager.insertPlayer("Cicchetti Simone");
-            dbManager.insertPlayer("Colombi Alfredo");
-            dbManager.insertPlayer("Conti Stefano");
-            dbManager.insertPlayer("Costanzo Salvatore");
-            dbManager.insertPlayer("D'Antimi Alessio");
-            dbManager.insertPlayer("D'Antimi Matteo");
-            dbManager.insertPlayer("D'Antimi Stefano");
-            dbManager.insertPlayer("D'Auria Andrea");
-            dbManager.insertPlayer("De Santis Mattia");
-            dbManager.insertPlayer("Dessì Flavio");
-            dbManager.insertPlayer("Giustini Daniele");
-            dbManager.insertPlayer("Giustini Patrizio");
-            dbManager.insertPlayer("Masci Antonio");
-            dbManager.insertPlayer("Palma Mario");
-            dbManager.insertPlayer("Portieri Emanuele");
-            dbManager.insertPlayer("Rainaldi Daniele (78)");
-            dbManager.insertPlayer("Rainaldi Daniele (97)");
-            dbManager.insertPlayer("Saccucci Valerio");
-            dbManager.insertPlayer("Sebastiani Alessandro");
-            dbManager.insertPlayer("Sebastiani Francesco");
-        }
-        result = dbManager.queryTeams();
-        result.moveToFirst();
-        if (result.getCount() == 0){
-            dbManager.insertTeam("Anticoli Corrado 1966");
-            dbManager.insertTeam("Arcinazzo Romano");
-            dbManager.insertTeam("Arsoli");
-            dbManager.insertTeam("ASD Riofreddo Calcio");
-            dbManager.insertTeam("Cavaliere Camerata");
-            dbManager.insertTeam("Città di Castelmadama 1968");
-            dbManager.insertTeam("Nuova Leonina Pietralata");
-            dbManager.insertTeam("Polisportiva Mandela");
-            dbManager.insertTeam("Rocca Santo Stefano");
-            dbManager.insertTeam("Sporting San Lorenzo");
-            dbManager.insertTeam("Supreme Sport Village");
-            dbManager.insertTeam("Villa Gordiani");
-        }
+//        Cursor result = dbManager.queryPlayers();
+//        result.moveToFirst();
+//        if (result.getCount() == 0){
+//            dbManager.insertPlayer("Alivernini Marco");
+//            dbManager.insertPlayer("Artibani Francesco");
+//            dbManager.insertPlayer("Artibani Giuseppe");
+//            dbManager.insertPlayer("Basile Gianluca");
+//            dbManager.insertPlayer("Cicchetti Simone");
+//            dbManager.insertPlayer("Colombi Alfredo");
+//            dbManager.insertPlayer("Conti Stefano");
+//            dbManager.insertPlayer("Costanzo Salvatore");
+//            dbManager.insertPlayer("D'Antimi Alessio");
+//            dbManager.insertPlayer("D'Antimi Matteo");
+//            dbManager.insertPlayer("D'Antimi Stefano");
+//            dbManager.insertPlayer("D'Auria Andrea");
+//            dbManager.insertPlayer("De Santis Mattia");
+//            dbManager.insertPlayer("Dessì Flavio");
+//            dbManager.insertPlayer("Giustini Daniele");
+//            dbManager.insertPlayer("Giustini Patrizio");
+//            dbManager.insertPlayer("Masci Antonio");
+//            dbManager.insertPlayer("Palma Mario");
+//            dbManager.insertPlayer("Portieri Emanuele");
+//            dbManager.insertPlayer("Rainaldi Daniele (78)");
+//            dbManager.insertPlayer("Rainaldi Daniele (97)");
+//            dbManager.insertPlayer("Saccucci Valerio");
+//            dbManager.insertPlayer("Sebastiani Alessandro");
+//            dbManager.insertPlayer("Sebastiani Francesco");
+//        }
+//        result = dbManager.queryTeams();
+//        result.moveToFirst();
+//        if (result.getCount() == 0){
+//            dbManager.insertTeam("Anticoli Corrado 1966");
+//            dbManager.insertTeam("Arcinazzo Romano");
+//            dbManager.insertTeam("Arsoli");
+//            dbManager.insertTeam("ASD Riofreddo Calcio");
+//            dbManager.insertTeam("Cavaliere Camerata");
+//            dbManager.insertTeam("Città di Castelmadama 1968");
+//            dbManager.insertTeam("Nuova Leonina Pietralata");
+//            dbManager.insertTeam("Polisportiva Mandela");
+//            dbManager.insertTeam("Rocca Santo Stefano");
+//            dbManager.insertTeam("Sporting San Lorenzo");
+//            dbManager.insertTeam("Supreme Sport Village");
+//            dbManager.insertTeam("Villa Gordiani");
+//        }
 
         executeOnResume = false;
 
